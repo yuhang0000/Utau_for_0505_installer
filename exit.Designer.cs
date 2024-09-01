@@ -74,7 +74,7 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(305, 140);
+            this.button1.Location = new System.Drawing.Point(301, 136);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(95, 31);
             this.button1.TabIndex = 11;
@@ -85,7 +85,7 @@
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(204, 140);
+            this.button2.Location = new System.Drawing.Point(200, 136);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(95, 31);
             this.button2.TabIndex = 11;
@@ -106,7 +106,9 @@
             this.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(430, 230);
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(430, 230);
             this.Name = "exit";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;

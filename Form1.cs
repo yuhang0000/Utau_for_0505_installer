@@ -33,9 +33,11 @@ namespace Utau_for_0505_installer
         public static class 全局变量
         {
             public static Byte[] utau;
+            public static bool noexit = false;
+            public static bool areurun = false;
             public static string[] tips = { "看俺幹嘛?", "球球你裝個屋塔屋吧。\r\n\r\nヾ(^▽^*)))", "俺要調教您!" };
         }
-        
+
         //设定光标样式
         [DllImport("user32.dll")]
         public static extern IntPtr LoadCursorFromFile(string fileName);
@@ -59,11 +61,11 @@ namespace Utau_for_0505_installer
                 free = Math.Round(free, 2);
                 no31.label3.Text = "磁盤剩餘大小: " + free.ToString() + houzhui;
             }
-            catch 
+            catch
             {
                 no31.label3.Text = "磁盤剩餘大小: 0 MB";
                 SystemSounds.Hand.Play();
-                MessageBox.Show("該路徑訪問失效: \r\n" + path,"Oops!");
+                MessageBox.Show("該路徑訪問失效: \r\n" + path, "Oops!");
             }
             long size = 全局变量.utau.LongLength;
             Console.WriteLine("剩余空间: " + output);
@@ -77,6 +79,15 @@ namespace Utau_for_0505_installer
                 no31.label4.Visible = false;
             }
             return output;
+        }
+
+        //开始安装
+        public string 安装(string path,bool go2web = false)
+        {
+            no51.textBox1.Text = "開始解壓...";
+            no51.progressBar1.Style = ProgressBarStyle.Blocks;
+            no51.progressBar1.Value = 50;
+            return null;
         }
 
         //刚打开就运行
@@ -171,6 +182,8 @@ namespace Utau_for_0505_installer
                 this.button1.Enabled = false;
                 this.button2.Enabled = false;
                 this.button3.Enabled = false;
+                全局变量.areurun = true;
+                安装(no31.textBox1.Text);
             }
 
         }
@@ -229,13 +242,73 @@ namespace Utau_for_0505_installer
         }
 
         //阻止关闭
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        [DllImport("user32.dll")]
+        private static extern bool FlashWindow(IntPtr hwnd, bool bInvert);
+
+        private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            exit form = new exit();
-            form.ShowDialog();
-            if (exit.exit1.exit2 == false)
+            if (全局变量.areurun == true)
             {
                 e.Cancel = true;
+                SystemSounds.Hand.Play();
+                if (全局变量.noexit == false)
+                {
+                    全局变量.noexit = true;
+                    FlashWindow(this.Handle, true);
+                    await Task.Delay(30);
+                    FlashWindow(this.Handle, true);
+                    await Task.Delay(30);
+                    FlashWindow(this.Handle, true);
+                    await Task.Delay(30);
+                    FlashWindow(this.Handle, true);
+                    await Task.Delay(30);
+                    FlashWindow(this.Handle, true);
+                    await Task.Delay(30);
+                    FlashWindow(this.Handle, true);
+                    await Task.Delay(30);
+                    FlashWindow(this.Handle, true);
+                    await Task.Delay(30);
+                    FlashWindow(this.Handle, true);
+                    await Task.Delay(30);
+                    FlashWindow(this.Handle, true);
+                    await Task.Delay(30);
+                    FlashWindow(this.Handle, true);
+                    await Task.Delay(30);
+                    FlashWindow(this.Handle, true);
+                    await Task.Delay(30);
+                    FlashWindow(this.Handle, true);
+                    await Task.Delay(30);
+                    FlashWindow(this.Handle, true);
+                    await Task.Delay(30);
+                    FlashWindow(this.Handle, true);
+                    await Task.Delay(30);
+                    FlashWindow(this.Handle, true);
+                    await Task.Delay(30);
+                    FlashWindow(this.Handle, true);
+                    await Task.Delay(30);
+                    FlashWindow(this.Handle, true);
+                    await Task.Delay(30);
+                    FlashWindow(this.Handle, true);
+                    await Task.Delay(30);
+                    全局变量.noexit = false;
+                    FlashWindow(this.Handle, true);
+                    await Task.Delay(30);
+                    FlashWindow(this.Handle, false);
+                    await Task.Delay(30);
+                    FlashWindow(this.Handle, false);
+                    await Task.Delay(30);
+                    FlashWindow(this.Handle, false);
+                    return;
+                }
+            }
+            else
+            {
+                exit form = new exit();
+                form.ShowDialog();
+                if (exit.exit1.exit2 == false)
+                {
+                    e.Cancel = true;
+                }
             }
         }
     }
