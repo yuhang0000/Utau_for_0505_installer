@@ -160,6 +160,9 @@
   <data name="原始" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\Cursor\原始.cur;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="哇" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\Cursor\哇.cur;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="忙" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\Cursor\忙.cur;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

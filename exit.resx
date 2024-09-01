@@ -117,13 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="label20.Text" xml:space="preserve">
-    <value>•禁止直接將這些程式以及源代碼文件作為的商品進行出售;
-•禁止將這些程式以及源代碼文件應用於違反國家法律法規的任何場景;
-•你可以對這些程式和源代碼文件進行修改，但必須同樣遵循和繼承 GPLv3 協議，修改後的衍生文件必須同樣公開源代碼、禁止任何商業活動。
-•此項目僅對已編譯的二進制程式和源代碼文件進行開源共享，内嵌、包含、借用、引用的 第三方庫、圖像、媒體文檔 等不予開源，歸屬第三方所有。
-•此項目所使用/製造的 自家角色、圖像、影音、媒體文檔 等在未申明的情況下均不予 挪用、修改，分發，再分發，商業化。</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

@@ -81,26 +81,32 @@ namespace Utau_for_0505_installer
 
         //刚打开就运行
         private void Form1_Load(object sender, EventArgs e)
-        {
+        { 
             // 从资源中读取光标文件
             byte[] cursorData1 = Utau_for_0505_installer.Resource.默认;
             byte[] cursorData2 = Utau_for_0505_installer.Resource.问号;
+            byte[] cursorData3 = Utau_for_0505_installer.Resource.错误;
 
             // 创建一个临时文件来保存光标数据
             string tempFileName1 = Path.GetTempFileName();
             string tempFileName2 = Path.GetTempFileName();
+            string tempFileName3 = Path.GetTempFileName();
             File.WriteAllBytes(tempFileName1, cursorData1);
             File.WriteAllBytes(tempFileName2, cursorData2);
+            File.WriteAllBytes(tempFileName3, cursorData3);
 
             // 加载光标
             IntPtr Defaultcursor = LoadCursorFromFile(tempFileName1);
             IntPtr Helpcursor = LoadCursorFromFile(tempFileName2);
+            IntPtr errcursor = LoadCursorFromFile(tempFileName3);
 
             // 设置光标
             Cursor Default = new Cursor(Defaultcursor);
             Cursor Help = new Cursor(Helpcursor);
+            Cursor err = new Cursor(errcursor);
             this.Cursor = Default;
             this.label5.Cursor = Help;
+            this.button1.Cursor = err;
 
             // 清理临时文件
             File.Delete(tempFileName1);
@@ -120,6 +126,9 @@ namespace Utau_for_0505_installer
             }
             no31.textBox1.Text = path;
             计算磁盘剩余空间(path);
+
+            //讨厌 “” , 稀饭 ""
+            no21.checkedListBox1.Items[2] = "自動訂閲 \"Untitled_0505\" 嗶哩嗶哩頻道";
         }
 
         //下一步
@@ -207,11 +216,27 @@ namespace Utau_for_0505_installer
             no21.label4.Text = "轉入上一頁面。";
         }
 
+        private void label5_MouseEnter(object sender, EventArgs e)
+        {
+            no21.label4.Text = "轉入關於頁面...";
+        }
+
         //关于
         private void label5_Click(object sender, EventArgs e)
         {
             info infoform = new info();
             infoform.ShowDialog();
+        }
+
+        //阻止关闭
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            exit form = new exit();
+            form.ShowDialog();
+            if (exit.exit1.exit2 == false)
+            {
+                e.Cancel = true;
+            }
         }
     }
 }

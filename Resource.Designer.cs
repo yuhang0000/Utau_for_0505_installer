@@ -203,6 +203,16 @@ namespace Utau_for_0505_installer {
         /// <summary>
         ///   查找 System.Byte[] 类型的本地化资源。
         /// </summary>
+        internal static byte[] 哇 {
+            get {
+                object obj = ResourceManager.GetObject("哇", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
         internal static byte[] 忙 {
             get {
                 object obj = ResourceManager.GetObject("忙", resourceCulture);
