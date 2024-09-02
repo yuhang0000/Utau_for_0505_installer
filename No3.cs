@@ -32,12 +32,14 @@ namespace Utau_for_0505_installer
                 string path = dialog.SelectedPath;
                 textBox1.Text = path;
                 Form1.让我看看.计算磁盘剩余空间(path);
+                //Utau_for_0505_installer.Form1.让我看看.UAC(path);
             }
         }
 
         private void textBox1_Leave(object sender, EventArgs e)
         {
             Form1.让我看看.计算磁盘剩余空间(this.textBox1.Text);
+            //Utau_for_0505_installer.Form1.让我看看.UAC(this.textBox1.Text);
         }
     }
 }

@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
+using System.IO.Compression;
+using System.IO.Pipes;
 using System.Linq;
 using System.Media;
 using System.Reflection;
+using System.Resources;
 using System.Runtime.InteropServices;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,11 +21,17 @@ namespace Utau_for_0505_installer
 {
     public partial class Form1 : Form
     {
+
         //全局访问 Form1 实例
         public static Form1 让我看看 { get; private set; }
-        public Form1()
+        public Form1(string[] args = null)
         {
             InitializeComponent();
+            if (args.Length != 0)
+            {
+                //this.label1.Text = args[0];
+                MessageBox.Show(args[0]);
+            }
             让我看看 = this;
         }
 
@@ -35,6 +46,8 @@ namespace Utau_for_0505_installer
             public static Byte[] utau;
             public static bool noexit = false;
             public static bool areurun = false;
+            public static long zipsize = 0;
+            public static int zipfilenum = 0;
             public static string[] tips = { "看俺幹嘛?", "球球你裝個屋塔屋吧。\r\n\r\nヾ(^▽^*)))", "俺要調教您!" };
         }
 
@@ -42,6 +55,19 @@ namespace Utau_for_0505_installer
         [DllImport("user32.dll")]
         public static extern IntPtr LoadCursorFromFile(string fileName);
 
+        //加上小盾牌图标
+        [DllImport("user32.dll")]
+        private static extern IntPtr SendMessage(HandleRef hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+        public void UACButton(bool uac = false)
+        {
+            uint BCM_SETSHIELD = 0x0000160C;
+            if (uac == false)
+            {
+                SendMessage(new HandleRef(button2, button2.Handle), BCM_SETSHIELD, new IntPtr(0), new IntPtr(0));
+                return;
+            }
+            SendMessage(new HandleRef(button2, button2.Handle), BCM_SETSHIELD, new IntPtr(0), new IntPtr(1));
+        }
 
         //计算剩余空间
         public string 计算磁盘剩余空间(string path)
@@ -67,7 +93,7 @@ namespace Utau_for_0505_installer
                 SystemSounds.Hand.Play();
                 MessageBox.Show("該路徑訪問失效: \r\n" + path, "Oops!");
             }
-            long size = 全局变量.utau.LongLength;
+            long size = 全局变量.zipsize;
             Console.WriteLine("剩余空间: " + output);
             Console.WriteLine("所需空间: " + size);
             if (long.Parse(output) < size)
@@ -81,10 +107,63 @@ namespace Utau_for_0505_installer
             return output;
         }
 
+        //判断目标文件夹是否需要管理员权限
+        public bool UAC(string path)
+        {
+            bool noway = false;
+            try
+            {
+                DirectoryInfo dir = new DirectoryInfo(path);
+                DirectorySecurity do_u_need_UAC = dir.GetAccessControl(AccessControlSections.Access);
+            }
+            catch
+            {
+                noway = true;
+            }
+            UACButton(noway);
+            Console.WriteLine("是否需要UAC: " + noway);
+            return noway;
+        }
+
         //开始安装
         public string 安装(string path,bool go2web = false)
         {
             no51.textBox1.Text = "開始解壓...";
+            if(UAC(path) == true)
+            {
+                var startInfo = new ProcessStartInfo
+                {
+                    FileName = Application.ExecutablePath,
+                    Verb = "runas", // 请求以提升的权限运行
+                    Arguments = "elevated" // 传递参数，用于识别是否以管理员模式运行
+                };
+
+                // 使用ProcessStartInfo启动一个新的进程
+                try
+                {
+                    if (Process.Start(startInfo) != null)
+                    {
+                        MessageBox.Show("进程已作为管理员启动！");
+                    }
+                    else
+                    {
+                        MessageBox.Show("未能启动进程，请确认您是否有足够的权限！");
+                    }
+                }
+                catch 
+                {
+                    MessageBox.Show("未能启动进程，请确认您是否有足够的权限！");
+                }
+            }
+
+            //把鸭嗦包放进内存流里
+            using (var ms = new MemoryStream(全局变量.utau))
+            {
+                using (ZipArchive zip = new ZipArchive(ms))
+                {
+                    
+                }
+            }
             no51.progressBar1.Style = ProgressBarStyle.Blocks;
             no51.progressBar1.Value = 50;
             return null;
@@ -92,7 +171,7 @@ namespace Utau_for_0505_installer
 
         //刚打开就运行
         private void Form1_Load(object sender, EventArgs e)
-        { 
+        {
             // 从资源中读取光标文件
             byte[] cursorData1 = Utau_for_0505_installer.Resource.默认;
             byte[] cursorData2 = Utau_for_0505_installer.Resource.问号;
@@ -125,8 +204,22 @@ namespace Utau_for_0505_installer
 
             //计算安装压缩包大小
             全局变量.utau = Utau_for_0505_installer.Resource.UTAU;
-            Double size = Math.Round(全局变量.utau.LongLength / (1024.0 * 1024.0), 2);
+            using (var ms = new MemoryStream(全局变量.utau))
+            {
+                using (ZipArchive zip = new ZipArchive(ms))
+                {
+                    //文件总数
+                    全局变量.zipfilenum = zip.Entries.Count;
+                    foreach (var entry in zip.Entries)
+                    {
+                        全局变量.zipsize += entry.Length;
+                    }
+                }
+            }
+            //Double size = Math.Round(全局变量.utau.LongLength / (1024.0 * 1024.0), 2);
+            Double size = Math.Round(全局变量.zipsize / (1024.0 * 1024.0), 2);
             no31.label2.Text = "所需大小: " + size.ToString() + " MB";
+            no51.progressBar1.Maximum = 全局变量.zipfilenum;
 
             //获取默认安装路径
             string path = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + @"\Utau\";
@@ -159,16 +252,19 @@ namespace Utau_for_0505_installer
                 this.no31.Visible = false;
                 this.no31.Enabled = false;
                 this.button2.Text = "裝載(I)";
+                UAC(no31.textBox1.Text);
                 if (this.no21.checkBox1.Checked == true)
                 {
-                    this.no41.textBox1.Text = "裝載類型：\r\n    默認裝載方案\r\n\r\n所選組件：\r\n    " +
+                    this.no41.textBox1.Text = "裝載類型：\r\n    默認裝載方案\r\n\r\n裝載路徑: \r\n    " +
+                        no31.textBox1.Text + "\r\n\r\n所選組件：\r\n    " +
                         "Utau 0.04.18 簡中版 主體程式\r\n    五號音源庫\r\n      " +
                         "\r\n附加事項：\r\n" +
-                        "    裝載完成後跳轉至瀏覽器並自動訂閲 \"Untitled_0505\" 嗶哩嗶哩頻道\r\n";
+                        "    裝載完成後跳轉至瀏覽器並自動訂閲 \"Untitled_0505\" 嗶哩嗶哩頻道";
                 }
                 else
                 {
-                    this.no41.textBox1.Text = "裝載類型：\r\n    用戶自選裝載方案\r\n\r\n所選組件：\r\n    " +
+                    this.no41.textBox1.Text = "裝載類型：\r\n    用戶自選裝載方案\r\n\r\n裝載路徑: \r\n    " + 
+                        no31.textBox1.Text + "\r\n\r\n所選組件：\r\n    " +
                         "Utau 0.04.18 簡中版 主體程式\r\n    五號音源庫\r\n      " +
                         "\r\n附加事項：\r\n" + "    无";
                 }
@@ -198,6 +294,7 @@ namespace Utau_for_0505_installer
                 this.no31.Visible = true;
                 this.no31.Enabled = true;
                 this.button2.Text = "下一步(N)>";
+                UACButton(false);
                 return;
             }
             else if (this.no31.Visible == true && this.no41.Visible == false)
@@ -310,6 +407,12 @@ namespace Utau_for_0505_installer
                     e.Cancel = true;
                 }
             }
+        }
+
+        //强制退出
+        private void label6_DoubleClick(object sender, EventArgs e)
+        {
+            Process.GetCurrentProcess().Kill();
         }
     }
 }

@@ -52,6 +52,10 @@ namespace Utau_for_0505_installer
             this.linkLabel3.Cursor = ink;
             this.linkLabel4.Cursor = ink;
             this.linkLabel5.Cursor = ink;
+
+            // 清理临时文件
+            File.Delete(tempFileName1);
+            File.Delete(tempFileName2);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -77,6 +81,11 @@ namespace Utau_for_0505_installer
         private void linkLabel5_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("explorer", "http://github.com/yuhang0000/Utau_for_0505_installer/");
+        }
+
+        private void linkLabel6_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("explorer", "http://www.nuget.org/packages/System.IO.Compression/");
         }
     }
 }

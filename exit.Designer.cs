@@ -67,16 +67,16 @@
             this.pictureBox1.Location = new System.Drawing.Point(-479, -39);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1828, 172);
+            this.pictureBox1.Size = new System.Drawing.Size(1828, 171);
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
             // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(301, 136);
+            this.button1.Location = new System.Drawing.Point(304, 139);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(95, 31);
+            this.button1.Size = new System.Drawing.Size(96, 32);
             this.button1.TabIndex = 11;
             this.button1.Text = "返回";
             this.button1.UseVisualStyleBackColor = true;
@@ -85,9 +85,9 @@
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(200, 136);
+            this.button2.Location = new System.Drawing.Point(202, 139);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(95, 31);
+            this.button2.Size = new System.Drawing.Size(96, 32);
             this.button2.TabIndex = 11;
             this.button2.Text = "結束";
             this.button2.UseVisualStyleBackColor = true;

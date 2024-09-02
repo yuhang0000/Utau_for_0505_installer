@@ -60,6 +60,10 @@ namespace Utau_for_0505_installer
             Cursor err = new Cursor(errcursor);
             this.Cursor = Default;
             this.button2.Cursor = err;
+
+            // 清理临时文件
+            File.Delete(tempFileName1);
+            File.Delete(tempFileName2);
         }
     }
 }

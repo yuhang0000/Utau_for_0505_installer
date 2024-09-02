@@ -57,6 +57,8 @@
             this.label20 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.linkLabel6 = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -65,7 +67,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.SystemColors.Control;
-            this.label2.Location = new System.Drawing.Point(39, 273);
+            this.label2.Location = new System.Drawing.Point(39, 268);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(215, 15);
             this.label2.TabIndex = 1;
@@ -76,7 +78,7 @@
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.BackColor = System.Drawing.SystemColors.Control;
             this.linkLabel1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.linkLabel1.Location = new System.Drawing.Point(260, 273);
+            this.linkLabel1.Location = new System.Drawing.Point(260, 268);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(247, 15);
             this.linkLabel1.TabIndex = 2;
@@ -138,9 +140,9 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(575, 810);
+            this.button1.Location = new System.Drawing.Point(574, 859);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(95, 31);
+            this.button1.Size = new System.Drawing.Size(96, 32);
             this.button1.TabIndex = 10;
             this.button1.Text = "結束";
             this.button1.UseVisualStyleBackColor = true;
@@ -158,7 +160,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.BackColor = System.Drawing.SystemColors.Control;
-            this.label8.Location = new System.Drawing.Point(39, 296);
+            this.label8.Location = new System.Drawing.Point(39, 291);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(281, 15);
             this.label8.TabIndex = 1;
@@ -169,7 +171,7 @@
             this.linkLabel2.AutoSize = true;
             this.linkLabel2.BackColor = System.Drawing.SystemColors.Control;
             this.linkLabel2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.linkLabel2.Location = new System.Drawing.Point(326, 296);
+            this.linkLabel2.Location = new System.Drawing.Point(326, 291);
             this.linkLabel2.Name = "linkLabel2";
             this.linkLabel2.Size = new System.Drawing.Size(207, 15);
             this.linkLabel2.TabIndex = 2;
@@ -181,7 +183,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.BackColor = System.Drawing.SystemColors.Control;
-            this.label9.Location = new System.Drawing.Point(39, 341);
+            this.label9.Location = new System.Drawing.Point(39, 336);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(256, 15);
             this.label9.TabIndex = 1;
@@ -192,7 +194,7 @@
             this.linkLabel3.AutoSize = true;
             this.linkLabel3.BackColor = System.Drawing.SystemColors.Control;
             this.linkLabel3.Cursor = System.Windows.Forms.Cursors.Default;
-            this.linkLabel3.Location = new System.Drawing.Point(301, 341);
+            this.linkLabel3.Location = new System.Drawing.Point(301, 336);
             this.linkLabel3.Name = "linkLabel3";
             this.linkLabel3.Size = new System.Drawing.Size(335, 15);
             this.linkLabel3.TabIndex = 2;
@@ -204,7 +206,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.BackColor = System.Drawing.SystemColors.Control;
-            this.label10.Location = new System.Drawing.Point(39, 318);
+            this.label10.Location = new System.Drawing.Point(39, 313);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(261, 15);
             this.label10.TabIndex = 1;
@@ -215,7 +217,7 @@
             this.linkLabel4.AutoSize = true;
             this.linkLabel4.BackColor = System.Drawing.SystemColors.Control;
             this.linkLabel4.Cursor = System.Windows.Forms.Cursors.Default;
-            this.linkLabel4.Location = new System.Drawing.Point(306, 318);
+            this.linkLabel4.Location = new System.Drawing.Point(306, 313);
             this.linkLabel4.Name = "linkLabel4";
             this.linkLabel4.Size = new System.Drawing.Size(279, 15);
             this.linkLabel4.TabIndex = 2;
@@ -226,7 +228,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(39, 393);
+            this.label11.Location = new System.Drawing.Point(39, 385);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(105, 15);
             this.label11.TabIndex = 12;
@@ -235,7 +237,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(151, 393);
+            this.label12.Location = new System.Drawing.Point(151, 385);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(183, 15);
             this.label12.TabIndex = 13;
@@ -244,7 +246,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(151, 415);
+            this.label13.Location = new System.Drawing.Point(151, 407);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(183, 15);
             this.label13.TabIndex = 13;
@@ -253,7 +255,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(151, 436);
+            this.label14.Location = new System.Drawing.Point(151, 428);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(175, 15);
             this.label14.TabIndex = 13;
@@ -262,7 +264,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(151, 458);
+            this.label15.Location = new System.Drawing.Point(151, 450);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(82, 15);
             this.label15.TabIndex = 13;
@@ -271,7 +273,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(39, 501);
+            this.label16.Location = new System.Drawing.Point(39, 778);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(111, 15);
             this.label16.TabIndex = 14;
@@ -280,7 +282,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(151, 501);
+            this.label17.Location = new System.Drawing.Point(151, 778);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(255, 15);
             this.label17.TabIndex = 15;
@@ -289,7 +291,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(39, 550);
+            this.label18.Location = new System.Drawing.Point(39, 548);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(98, 15);
             this.label18.TabIndex = 16;
@@ -299,7 +301,7 @@
             // 
             this.linkLabel5.AutoSize = true;
             this.linkLabel5.Cursor = System.Windows.Forms.Cursors.Default;
-            this.linkLabel5.Location = new System.Drawing.Point(135, 550);
+            this.linkLabel5.Location = new System.Drawing.Point(135, 548);
             this.linkLabel5.Name = "linkLabel5";
             this.linkLabel5.Size = new System.Drawing.Size(431, 15);
             this.linkLabel5.TabIndex = 17;
@@ -310,7 +312,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(39, 604);
+            this.label19.Location = new System.Drawing.Point(39, 599);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(183, 15);
             this.label19.TabIndex = 18;
@@ -318,7 +320,7 @@
             // 
             // label20
             // 
-            this.label20.Location = new System.Drawing.Point(39, 633);
+            this.label20.Location = new System.Drawing.Point(39, 628);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(597, 138);
             this.label20.TabIndex = 19;
@@ -344,16 +346,39 @@
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(39, 497);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(143, 15);
+            this.label21.TabIndex = 14;
+            this.label21.Text = "所使用的第三方庫: ";
+            // 
+            // linkLabel6
+            // 
+            this.linkLabel6.AutoSize = true;
+            this.linkLabel6.BackColor = System.Drawing.SystemColors.Control;
+            this.linkLabel6.Cursor = System.Windows.Forms.Cursors.Default;
+            this.linkLabel6.Location = new System.Drawing.Point(179, 497);
+            this.linkLabel6.Name = "linkLabel6";
+            this.linkLabel6.Size = new System.Drawing.Size(231, 15);
+            this.linkLabel6.TabIndex = 2;
+            this.linkLabel6.TabStop = true;
+            this.linkLabel6.Text = "System.IO.Compression v4.3.0";
+            this.linkLabel6.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel6_LinkClicked);
+            // 
             // info
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(682, 853);
+            this.ClientSize = new System.Drawing.Size(682, 903);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.linkLabel5);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.label17);
+            this.Controls.Add(this.label21);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.label14);
@@ -368,6 +393,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.linkLabel6);
             this.Controls.Add(this.linkLabel3);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.linkLabel4);
@@ -379,8 +405,8 @@
             this.Controls.Add(this.pictureBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(700, 900);
-            this.MinimumSize = new System.Drawing.Size(700, 900);
+            this.MaximumSize = new System.Drawing.Size(700, 950);
+            this.MinimumSize = new System.Drawing.Size(700, 950);
             this.Name = "info";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "關於";
@@ -421,5 +447,7 @@
         private System.Windows.Forms.LinkLabel linkLabel5;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.LinkLabel linkLabel6;
     }
 }
