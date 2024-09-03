@@ -77,7 +77,7 @@ namespace Utau_for_0505_installer
             {
                 DriveInfo Pan = new DriveInfo(path);
                 output = Pan.TotalFreeSpace.ToString();
-                Double free = double.Parse(Pan.TotalFreeSpace.ToString()) / (1024 * 1024);
+                Double free = double.Parse(output) / (1024 * 1024);
                 string houzhui = " MB";
                 if (free > 1024)
                 {
@@ -218,7 +218,7 @@ namespace Utau_for_0505_installer
             }
             //Double size = Math.Round(全局变量.utau.LongLength / (1024.0 * 1024.0), 2);
             Double size = Math.Round(全局变量.zipsize / (1024.0 * 1024.0), 2);
-            no31.label2.Text = "所需大小: " + size.ToString() + " MB";
+            no31.label2.Text = "解壓所需大小: " + size.ToString() + " MB";
             no51.progressBar1.Maximum = 全局变量.zipfilenum;
 
             //获取默认安装路径
@@ -271,6 +271,23 @@ namespace Utau_for_0505_installer
             }
             else if (this.no31.Visible == false && this.no41.Visible == true)
             {
+                //先判断目标文件夹能不能访问
+                long freesize = long.Parse(计算磁盘剩余空间(no31.textBox1.Text));
+                if (freesize < 全局变量.zipsize)
+                {
+                    Double free = freesize / (1024 * 1024);
+                    string houzhui = " MB";
+                    if (free > 1024)
+                    {
+                        free = free / 1024;
+                        houzhui = " GB";
+                    }
+                    free = Math.Round(free, 2);
+                    SystemSounds.Hand.Play();
+                    MessageBox.Show("磁盤剩餘大小不足以解壓文檔!\r\n磁盤剩餘大小: " + free.ToString() + houzhui + 
+                        "\r\n" + no31.label2.Text,"Oops!");
+                    return;
+                }
                 this.no51.Visible = true;
                 this.no51.Enabled = true;
                 this.no41.Visible = false;

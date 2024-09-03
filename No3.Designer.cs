@@ -69,9 +69,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(3, 65);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(115, 15);
+            this.label2.Size = new System.Drawing.Size(145, 15);
             this.label2.TabIndex = 3;
-            this.label2.Text = "所需大小: 0 MB";
+            this.label2.Text = "解壓所需大小: 0 MB";
             // 
             // label3
             // 

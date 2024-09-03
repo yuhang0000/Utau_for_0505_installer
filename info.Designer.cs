@@ -113,7 +113,7 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.SystemColors.Control;
             this.label4.Font = new System.Drawing.Font("宋体", 9F);
-            this.label4.Location = new System.Drawing.Point(39, 183);
+            this.label4.Location = new System.Drawing.Point(39, 182);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(191, 15);
             this.label4.TabIndex = 7;
@@ -122,7 +122,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(39, 204);
+            this.label5.Location = new System.Drawing.Point(39, 203);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(117, 15);
             this.label5.TabIndex = 8;
@@ -131,7 +131,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(39, 225);
+            this.label6.Location = new System.Drawing.Point(39, 224);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(187, 15);
             this.label6.TabIndex = 9;
