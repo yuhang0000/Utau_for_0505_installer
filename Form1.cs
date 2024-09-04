@@ -30,7 +30,22 @@ namespace Utau_for_0505_installer
             if (args.Length != 0)
             {
                 //this.label1.Text = args[0];
-                MessageBox.Show(args[0]);
+                //MessageBox.Show(args[0]);
+                //MessageBox.Show(args[1]);
+                try
+                {
+                    if (args[1] != "true" && args[1] != "false")
+                    {
+                        MessageBox.Show("參數錯誤!");
+                        Process.GetCurrentProcess().Kill();
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("參數錯誤!");
+                    Process.GetCurrentProcess().Kill();
+                }
+                全局变量.boot = args;
             }
             让我看看 = this;
         }
@@ -49,6 +64,7 @@ namespace Utau_for_0505_installer
             public static long zipsize = 0;
             public static int zipfilenum = 0;
             public static string[] tips = { "看俺幹嘛?", "球球你裝個屋塔屋吧。\r\n\r\nヾ(^▽^*)))", "俺要調教您!" };
+            public static string[] boot = null;
         }
 
         //设定光标样式
@@ -128,14 +144,30 @@ namespace Utau_for_0505_installer
         //开始安装
         public string 安装(string path,bool go2web = false)
         {
+            this.no51.Visible = true;
+            this.no51.Enabled = true;
+            this.no41.Visible = false;
+            this.no41.Enabled = false;
+            this.button1.Enabled = false;
+            this.button2.Enabled = false;
+            this.button3.Enabled = false;
+            全局变量.areurun = true;
             no51.textBox1.Text = "開始解壓...";
             if(UAC(path) == true)
             {
+                //新建个启动参数
+                if (path.Substring(path.Length - 1) == @"\" || path.Substring(path.Length - 1) == @"/")
+                {
+                    path = path.Substring(0, path.Length - 1);
+                }
+                string start = "\"" + path + "\" " + go2web;
+                //Console.WriteLine(start);
+
                 var startInfo = new ProcessStartInfo
                 {
                     FileName = Application.ExecutablePath,
                     Verb = "runas", // 请求以提升的权限运行
-                    Arguments = "elevated" // 传递参数，用于识别是否以管理员模式运行
+                    Arguments = start // 传递参数，用于识别是否以管理员模式运行
                 };
 
                 // 使用ProcessStartInfo启动一个新的进程
@@ -143,16 +175,17 @@ namespace Utau_for_0505_installer
                 {
                     if (Process.Start(startInfo) != null)
                     {
-                        MessageBox.Show("进程已作为管理员启动！");
+                        Console.WriteLine("进程已作为管理员启动！");
+                        Process.GetCurrentProcess().Kill();
                     }
                     else
                     {
-                        MessageBox.Show("未能启动进程，请确认您是否有足够的权限！");
+                        Console.WriteLine("未能启动进程，请确认您是否有足够的权限！");
                     }
                 }
                 catch 
                 {
-                    MessageBox.Show("未能启动进程，请确认您是否有足够的权限！");
+                    Console.WriteLine("未能启动进程，请确认您是否有足够的权限！");
                 }
             }
 
@@ -164,6 +197,7 @@ namespace Utau_for_0505_installer
                     
                 }
             }
+            //this.pictureBox2.Image = Utau_for_0505_installer.Resource.Sprite_0002_01;
             no51.progressBar1.Style = ProgressBarStyle.Blocks;
             no51.progressBar1.Value = 50;
             return null;
@@ -233,6 +267,30 @@ namespace Utau_for_0505_installer
 
             //讨厌 “” , 稀饭 ""
             no21.checkedListBox1.Items[2] = "自動訂閲 \"Untitled_0505\" 嗶哩嗶哩頻道";
+
+            //接受启动参数
+            if (全局变量.boot != null)
+            {
+                //先判断目标文件夹能不能访问
+                long freesize = long.Parse(计算磁盘剩余空间(全局变量.boot[0]));
+                if (freesize < 全局变量.zipsize)
+                {
+                    Double free = freesize / (1024 * 1024);
+                    string houzhui = " MB";
+                    if (free > 1024)
+                    {
+                        free = free / 1024;
+                        houzhui = " GB";
+                    }
+                    free = Math.Round(free, 2);
+                    SystemSounds.Hand.Play();
+                    MessageBox.Show("磁盤剩餘大小不足以解壓文檔!\r\n磁盤剩餘大小: " + free.ToString() + houzhui +
+                        "\r\n" + no31.label2.Text, "Oops!");
+                    return;
+                }
+                安装(全局变量.boot[0], bool.Parse(全局变量.boot[1]));
+            }
+
         }
 
         //下一步
@@ -288,15 +346,7 @@ namespace Utau_for_0505_installer
                         "\r\n" + no31.label2.Text,"Oops!");
                     return;
                 }
-                this.no51.Visible = true;
-                this.no51.Enabled = true;
-                this.no41.Visible = false;
-                this.no41.Enabled = false;
-                this.button1.Enabled = false;
-                this.button2.Enabled = false;
-                this.button3.Enabled = false;
-                全局变量.areurun = true;
-                安装(no31.textBox1.Text);
+                安装(no31.textBox1.Text, no21.checkBox1.Checked);
             }
 
         }
