@@ -16,5 +16,13 @@ namespace Utau_for_0505_installer
         {
             InitializeComponent();
         }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            this.textBox1.SelectionStart = this.textBox1.TextLength;
+            this.textBox1.SelectionLength = 0;
+            this.textBox1.ScrollToCaret();
+            //Console.WriteLine(this.textBox1.SelectionStart.ToString());
+        }
     }
 }

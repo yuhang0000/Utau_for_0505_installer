@@ -32,16 +32,37 @@ namespace Utau_for_0505_installer
                 //this.label1.Text = args[0];
                 //MessageBox.Show(args[0]);
                 //MessageBox.Show(args[1]);
+
+                //获取帮助
+                try
+                {
+                    if (args[0] == "-h" || args[0] == "-help" || args[0] == "/?")
+                    {
+                        MessageBox.Show("Utau for 0505 installer.exe [path] [go2web] \r\n\r\n" +
+                            "[path] = String , 指定裝載路徑;\r\n" +
+                            "[go2web] = bool , 在裝載結束後，是否訪問指定網頁。", "幫助是啥? 能吃嗎?");
+                        Process.GetCurrentProcess().Kill();
+                    }
+                }
+                catch
+                {
+                    SystemSounds.Hand.Play();
+                    MessageBox.Show("參數錯誤!");
+                    Process.GetCurrentProcess().Kill();
+                }
+
                 try
                 {
                     if (args[1] != "true" && args[1] != "false")
                     {
+                        SystemSounds.Hand.Play();
                         MessageBox.Show("參數錯誤!");
                         Process.GetCurrentProcess().Kill();
                     }
                 }
                 catch
                 {
+                    SystemSounds.Hand.Play();
                     MessageBox.Show("參數錯誤!");
                     Process.GetCurrentProcess().Kill();
                 }
@@ -53,6 +74,14 @@ namespace Utau_for_0505_installer
         //关闭按钮
         private void button1_Click(object sender, EventArgs e)
         {
+            if (no51.label1.Text == "裝載失敗: ")
+            {
+                Process.GetCurrentProcess().Kill();
+            }
+            else if (no51.label1.Text == "裝載完成! ")
+            {
+                Process.GetCurrentProcess().Kill();
+            }
             this.Close();
         }
 
@@ -65,6 +94,7 @@ namespace Utau_for_0505_installer
             public static int zipfilenum = 0;
             public static string[] tips = { "看俺幹嘛?", "球球你裝個屋塔屋吧。\r\n\r\nヾ(^▽^*)))", "俺要調教您!" };
             public static string[] boot = null;
+            public static string go2weblnk = "https://space.bilibili.com/497628252/";
         }
 
         //设定光标样式
@@ -142,7 +172,7 @@ namespace Utau_for_0505_installer
         }
 
         //开始安装
-        public string 安装(string path,bool go2web = false)
+        public async void 安装(string path,bool go2web = false)
         {
             this.no51.Visible = true;
             this.no51.Enabled = true;
@@ -181,26 +211,64 @@ namespace Utau_for_0505_installer
                     else
                     {
                         Console.WriteLine("未能启动进程，请确认您是否有足够的权限！");
+                        失败("無法訪問目標文件夾: \r\n" + path + "\r\n\r\n權限不足，拒絕訪問。");
+                        return;
                     }
                 }
                 catch 
                 {
                     Console.WriteLine("未能启动进程，请确认您是否有足够的权限！");
+                    失败("無法訪問目標文件夾: \r\n" + path + "\r\n\r\n權限不足，拒絕訪問。");
+                    return;
                 }
             }
 
+            //this.pictureBox2.Image = Utau_for_0505_installer.Resource.Sprite_0002_01;
+            //await Task.Delay(100);
             //把鸭嗦包放进内存流里
-            using (var ms = new MemoryStream(全局变量.utau))
+            try
             {
-                using (ZipArchive zip = new ZipArchive(ms))
+                await Task.Run(() =>
                 {
-                    
-                }
+                    using (var ms = new MemoryStream(全局变量.utau))
+                    {
+                        using (ZipArchive zip = new ZipArchive(ms))
+                        {
+                            this.Invoke((MethodInvoker)delegate
+                            {
+                                no51.progressBar1.Style = ProgressBarStyle.Blocks;
+                            });
+                            int filenum = 0;
+                            foreach (var num in zip.Entries)
+                            {
+                                filenum++;
+                                Console.WriteLine("正在解壓: " + num.FullName);
+                                this.Invoke((MethodInvoker)delegate
+                                {
+                                    no51.progressBar1.Value = filenum;
+                                    no51.textBox1.AppendText("\r\n正在解壓: " + num.FullName);
+                                    Application.DoEvents();
+                                });
+                            }
+                        }
+                    }
+                });
+            }
+            catch
+            {
+                失败();
+                return;
+            }
+
+            if (go2web == true)
+            {
+                Process.Start("explorer",全局变量.go2weblnk);
             }
             //this.pictureBox2.Image = Utau_for_0505_installer.Resource.Sprite_0002_01;
-            no51.progressBar1.Style = ProgressBarStyle.Blocks;
-            no51.progressBar1.Value = 50;
-            return null;
+            //no51.progressBar1.Value = 50;
+            no51.textBox1.Text = no51.textBox1.Text + "\r\n裝載完成!";
+            成功();
+            return;
         }
 
         //刚打开就运行
@@ -235,6 +303,7 @@ namespace Utau_for_0505_installer
             // 清理临时文件
             File.Delete(tempFileName1);
             File.Delete(tempFileName2);
+            File.Delete(tempFileName3);
 
             //计算安装压缩包大小
             全局变量.utau = Utau_for_0505_installer.Resource.UTAU;
@@ -284,8 +353,10 @@ namespace Utau_for_0505_installer
                     }
                     free = Math.Round(free, 2);
                     SystemSounds.Hand.Play();
-                    MessageBox.Show("磁盤剩餘大小不足以解壓文檔!\r\n磁盤剩餘大小: " + free.ToString() + houzhui +
-                        "\r\n" + no31.label2.Text, "Oops!");
+                    string err1 = "磁盤剩餘大小不足以解壓文檔!\r\n磁盤剩餘大小: " + free.ToString() + houzhui +
+                        "\r\n" + no31.label2.Text;
+                    MessageBox.Show(err1, "Oops!");
+                    失败(err1);
                     return;
                 }
                 安装(全局变量.boot[0], bool.Parse(全局变量.boot[1]));
@@ -300,6 +371,8 @@ namespace Utau_for_0505_installer
             {
                 this.no31.Visible = true;
                 this.no31.Enabled = true;
+                this.no21.Visible = false;
+                this.no21.Enabled = false;
                 this.button3.Enabled = true;
                 return;
             }
@@ -368,8 +441,59 @@ namespace Utau_for_0505_installer
             {
                 this.no31.Visible = false;
                 this.no31.Enabled = false;
+                this.no21.Visible = true;
+                this.no21.Enabled = true;
                 this.button3.Enabled = false;
             }
+        }
+
+        //失败哩
+        public void 失败(string err = "未知錯誤。",string path = null)
+        {
+            //清除数据
+            if(path != null)
+            {
+
+            }
+
+            this.pictureBox2.Image = Utau_for_0505_installer.Resource.Sprite_0002_03;
+            no51.progressBar1.Visible = false;
+            no51.label1.Visible = true;
+            no51.label1.Text = "裝載失敗: ";
+            no51.textBox1.Text = err;
+            no51.Visible = true;
+            no51.Enabled = true;
+            this.button1.Text = "結束";
+            this.pictureBox2.Left = 5;
+            this.button1.Cursor = this.Cursor;
+            this.button1.Enabled = true;
+            this.button2.Visible = false;
+            this.button3.Visible = false;
+            全局变量.areurun = false;
+            全局变量.noexit = false;
+        }
+        
+        //成功哩
+        public void 成功(string err = "裝載完成! ")
+        {
+            //this.pictureBox2.Image = Utau_for_0505_installer.Resource.Sprite_0002_02;
+            //this.pictureBox2.Left = 5;
+            no51.progressBar1.Visible = false;
+            no51.textBox1.Visible = false;
+            no51.label1.Visible = true;
+            no51.label1.Text = err;
+            no51.Visible = true;
+            no51.checkBox1.Visible = true;
+            no51.checkBox2.Visible = true;
+            no51.checkBox3.Visible = true;
+            no51.Enabled = true;
+            this.button1.Text = "結束";
+            this.button1.Cursor = this.Cursor;
+            this.button1.Enabled = true;
+            this.button2.Visible = false;
+            this.button3.Visible = false;
+            全局变量.areurun = false;
+            全局变量.noexit = false;
         }
 
         private void pictureBox2_MouseEnter(object sender, EventArgs e)
@@ -467,6 +591,15 @@ namespace Utau_for_0505_installer
             }
             else
             {
+
+                if (no51.label1.Text == "裝載失敗: ")
+                {
+                    Process.GetCurrentProcess().Kill();
+                }
+                else if (no51.label1.Text == "裝載完成! ")
+                {
+                    Process.GetCurrentProcess().Kill();
+                }
                 exit form = new exit();
                 form.ShowDialog();
                 if (exit.exit1.exit2 == false)

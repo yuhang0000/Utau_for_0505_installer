@@ -38,8 +38,17 @@ namespace Utau_for_0505_installer
 
         private void textBox1_Leave(object sender, EventArgs e)
         {
+            if (this.textBox1.Text.Length == 1)
+            {
+                this.textBox1.Text = this.textBox1.Text + ":";
+            }
             Form1.让我看看.计算磁盘剩余空间(this.textBox1.Text);
             //Utau_for_0505_installer.Form1.让我看看.UAC(this.textBox1.Text);
+        }
+
+        private void textBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.textBox1.SelectAll();
         }
     }
 }

@@ -51,7 +51,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.White;
             this.label1.Font = new System.Drawing.Font("宋体", 16F);
-            this.label1.Location = new System.Drawing.Point(110, 21);
+            this.label1.Location = new System.Drawing.Point(102, 21);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(256, 27);
             this.label1.TabIndex = 2;
@@ -62,7 +62,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.White;
             this.label2.Font = new System.Drawing.Font("宋体", 9F);
-            this.label2.Location = new System.Drawing.Point(115, 58);
+            this.label2.Location = new System.Drawing.Point(107, 58);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(234, 15);
             this.label2.TabIndex = 2;
@@ -92,11 +92,12 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.button1.Location = new System.Drawing.Point(480, 369);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(120, 32);
-            this.button1.TabIndex = 9;
+            this.button1.TabIndex = 22;
             this.button1.Text = "結束";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -109,7 +110,7 @@
             this.button2.Location = new System.Drawing.Point(354, 369);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(120, 32);
-            this.button2.TabIndex = 9;
+            this.button2.TabIndex = 21;
             this.button2.Text = "下一步(N)>";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -123,7 +124,7 @@
             this.button3.Location = new System.Drawing.Point(228, 369);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(120, 32);
-            this.button3.TabIndex = 9;
+            this.button3.TabIndex = 20;
             this.button3.Text = "<上一步(B)";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
@@ -133,7 +134,7 @@
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.White;
             this.pictureBox2.Image = global::Utau_for_0505_installer.Resource.Sprite_0002_04;
-            this.pictureBox2.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox2.Location = new System.Drawing.Point(1, 1);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(96, 96);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -188,6 +189,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.button1;
             this.ClientSize = new System.Drawing.Size(612, 413);
             this.Controls.Add(this.no51);
             this.Controls.Add(this.no41);
