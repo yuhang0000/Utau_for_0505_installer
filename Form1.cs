@@ -161,12 +161,48 @@ namespace Utau_for_0505_installer
             bool noway = false;
             try
             {
+                if(Directory.Exists(path) == false)
+                {
+                    try
+                    {
+                        Directory.CreateDirectory(path);
+
+                        if (Directory.Exists(path) == true)
+                        {
+                            noway = false;
+                            Directory.Delete(path, true);
+                            return noway;
+                        }
+                    }
+                    catch
+                    {
+                        noway = true;
+                        return true;
+                    }
+                }
+                else
+                {
+                    try
+                    {
+                        Directory.Delete(path);
+                    }
+                    catch (UnauthorizedAccessException ex)
+                    {
+                        return true;
+                    }
+                }
+                /*
                 DirectoryInfo dir = new DirectoryInfo(path);
                 DirectorySecurity do_u_need_UAC = dir.GetAccessControl(AccessControlSections.Access);
+                if (do_u_need_UAC.AreAccessRulesProtected == true)
+                {
+
+                } */
             }
-            catch
+            catch (Exception ex)
             {
                 noway = true;
+                MessageBox.Show("是否需要UAC: " + noway + "\r\n" + ex);
             }
             UACButton(noway);
             Console.WriteLine("是否需要UAC: " + noway);
@@ -254,7 +290,7 @@ namespace Utau_for_0505_installer
                                 });
                                 string fillpath = path + "\\" + num.FullName;
                                 //指定文件夹是否存在
-                                MessageBox.Show(Directory.Exists(fillpath) + "\r\n" + path.ToString(),fillpath);
+                                //MessageBox.Show(Directory.Exists(fillpath) + "\r\n" + path.ToString(),fillpath);
                                 if (Directory.Exists(fillpath) == false)
                                 {
                                     Directory.CreateDirectory(fillpath);
