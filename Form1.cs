@@ -13,6 +13,7 @@ using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
 using System.Security.AccessControl;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -47,23 +48,23 @@ namespace Utau_for_0505_installer
                 catch
                 {
                     SystemSounds.Hand.Play();
-                    MessageBox.Show("參數錯誤!");
+                    MessageBox.Show("參數錯誤!\r\n" + String.Join(" ",args),"Oops!");
                     Process.GetCurrentProcess().Kill();
                 }
 
                 try
                 {
-                    if (args[1] != "true" && args[1] != "false")
+                    if (args[1] != "true" && args[1] != "false" && args[1] != "True" && args[1] != "False")
                     {
                         SystemSounds.Hand.Play();
-                        MessageBox.Show("參數錯誤!");
+                        MessageBox.Show("參數錯誤!\r\n" + String.Join(" ", args), "Oops!");
                         Process.GetCurrentProcess().Kill();
                     }
                 }
                 catch
                 {
                     SystemSounds.Hand.Play();
-                    MessageBox.Show("參數錯誤!");
+                    MessageBox.Show("參數錯誤!\r\n" + String.Join(" ", args), "Oops!");
                     Process.GetCurrentProcess().Kill();
                 }
                 全局变量.boot = args;
@@ -95,6 +96,7 @@ namespace Utau_for_0505_installer
             public static string[] tips = { "看俺幹嘛?", "球球你裝個屋塔屋吧。\r\n\r\nヾ(^▽^*)))", "俺要調教您!" };
             public static string[] boot = null;
             public static string go2weblnk = "https://space.bilibili.com/497628252/";
+            public static string pushpath = "";
         }
 
         //设定光标样式
@@ -239,24 +241,33 @@ namespace Utau_for_0505_installer
                                 no51.progressBar1.Style = ProgressBarStyle.Blocks;
                             });
                             int filenum = 0;
+                            Directory.CreateDirectory(path);
                             foreach (var num in zip.Entries)
                             {
                                 filenum++;
-                                Console.WriteLine("正在解壓: " + num.FullName);
+                                //Console.WriteLine("正在解壓: " + num.FullName);
                                 this.Invoke((MethodInvoker)delegate
                                 {
                                     no51.progressBar1.Value = filenum;
                                     no51.textBox1.AppendText("\r\n正在解壓: " + num.FullName);
                                     Application.DoEvents();
                                 });
+                                string fillpath = path + "\\" + num.FullName;
+                                //指定文件夹是否存在
+                                MessageBox.Show(Directory.Exists(fillpath) + "\r\n" + path.ToString(),fillpath);
+                                if (Directory.Exists(fillpath) == false)
+                                {
+                                    Directory.CreateDirectory(fillpath);
+                                }
+                                num.ExtractToFile(fillpath,true);
                             }
                         }
                     }
                 });
             }
-            catch
+            catch (Exception err)
             {
-                失败();
+                失败(err.ToString());
                 return;
             }
 
@@ -338,6 +349,7 @@ namespace Utau_for_0505_installer
             no21.checkedListBox1.Items[2] = "自動訂閲 \"Untitled_0505\" 嗶哩嗶哩頻道";
 
             //接受启动参数
+            Application.DoEvents();
             if (全局变量.boot != null)
             {
                 //先判断目标文件夹能不能访问
@@ -467,6 +479,7 @@ namespace Utau_for_0505_installer
             this.pictureBox2.Left = 5;
             this.button1.Cursor = this.Cursor;
             this.button1.Enabled = true;
+            this.button1.Focus();
             this.button2.Visible = false;
             this.button3.Visible = false;
             全局变量.areurun = false;
@@ -490,6 +503,7 @@ namespace Utau_for_0505_installer
             this.button1.Text = "結束";
             this.button1.Cursor = this.Cursor;
             this.button1.Enabled = true;
+            this.button1.Focus();
             this.button2.Visible = false;
             this.button3.Visible = false;
             全局变量.areurun = false;

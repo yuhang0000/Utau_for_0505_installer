@@ -73,7 +73,7 @@
             this.checkBox2.Location = new System.Drawing.Point(6, 65);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(166, 19);
-            this.checkBox2.TabIndex = 9;
+            this.checkBox2.TabIndex = 10;
             this.checkBox2.Text = "在 [桌面] 創建捷徑";
             this.checkBox2.UseVisualStyleBackColor = true;
             this.checkBox2.Visible = false;
@@ -86,7 +86,7 @@
             this.checkBox1.Location = new System.Drawing.Point(6, 40);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(134, 19);
-            this.checkBox1.TabIndex = 10;
+            this.checkBox1.TabIndex = 9;
             this.checkBox1.Text = "結束後運行程式";
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.Visible = false;

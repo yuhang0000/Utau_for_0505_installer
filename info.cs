@@ -28,7 +28,7 @@ namespace Utau_for_0505_installer
         public void info_Load(object sender, EventArgs e)
         {
             this.label5.Text = "版本: v" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            this.label6.Text = "構建時間: " + System.IO.File.GetLastWriteTime(typeof(info).Assembly.Location);
+            this.label6.Text = "組建時間: " + System.IO.File.GetLastWriteTime(typeof(info).Assembly.Location);
             // 从资源中读取光标文件
             byte[] cursorData1 = Utau_for_0505_installer.Resource.默认;
             byte[] cursorData2 = Utau_for_0505_installer.Resource.哇;

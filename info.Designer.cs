@@ -81,7 +81,7 @@
             this.linkLabel1.Location = new System.Drawing.Point(260, 268);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(247, 15);
-            this.linkLabel1.TabIndex = 2;
+            this.linkLabel1.TabIndex = 1;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "(http://yuhang0000.github.io/)";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
@@ -135,7 +135,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(187, 15);
             this.label6.TabIndex = 9;
-            this.label6.Text = "構建時間: 2024-9-1-No.1";
+            this.label6.Text = "組建時間: 2024-9-1-No.1";
             // 
             // button1
             // 
@@ -144,7 +144,7 @@
             this.button1.Location = new System.Drawing.Point(574, 859);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(96, 32);
-            this.button1.TabIndex = 10;
+            this.button1.TabIndex = 0;
             this.button1.Text = "結束";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -198,7 +198,7 @@
             this.linkLabel3.Location = new System.Drawing.Point(301, 336);
             this.linkLabel3.Name = "linkLabel3";
             this.linkLabel3.Size = new System.Drawing.Size(335, 15);
-            this.linkLabel3.TabIndex = 2;
+            this.linkLabel3.TabIndex = 4;
             this.linkLabel3.TabStop = true;
             this.linkLabel3.Text = "(http://www.bilibili.com/read/cv7974422/)";
             this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);
@@ -221,7 +221,7 @@
             this.linkLabel4.Location = new System.Drawing.Point(306, 313);
             this.linkLabel4.Name = "linkLabel4";
             this.linkLabel4.Size = new System.Drawing.Size(279, 15);
-            this.linkLabel4.TabIndex = 2;
+            this.linkLabel4.TabIndex = 3;
             this.linkLabel4.TabStop = true;
             this.linkLabel4.Text = "(http://bowlroll.net/file/322764/)";
             this.linkLabel4.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel4_LinkClicked);
@@ -305,7 +305,7 @@
             this.linkLabel5.Location = new System.Drawing.Point(135, 548);
             this.linkLabel5.Name = "linkLabel5";
             this.linkLabel5.Size = new System.Drawing.Size(431, 15);
-            this.linkLabel5.TabIndex = 17;
+            this.linkLabel5.TabIndex = 6;
             this.linkLabel5.TabStop = true;
             this.linkLabel5.Text = "http://github.com/yuhang0000/Utau_for_0505_installer/";
             this.linkLabel5.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel5_LinkClicked);
@@ -364,7 +364,7 @@
             this.linkLabel6.Location = new System.Drawing.Point(179, 497);
             this.linkLabel6.Name = "linkLabel6";
             this.linkLabel6.Size = new System.Drawing.Size(231, 15);
-            this.linkLabel6.TabIndex = 2;
+            this.linkLabel6.TabIndex = 5;
             this.linkLabel6.TabStop = true;
             this.linkLabel6.Text = "System.IO.Compression v4.3.0";
             this.linkLabel6.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel6_LinkClicked);
